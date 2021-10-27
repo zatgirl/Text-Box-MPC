@@ -1,0 +1,158 @@
+# depslib dependency file v1.0
+1337885062 source:d:\ufsm\disciplinas\estruturas de dados\programas\mpc\version_4.7\demo\src\avancado.cpp
+	"mpc_c.h"
+	"demo1.h"
+	<math.h>
+
+1293057508 d:\ufsm\disciplinas\estruturas de dados\programas\mpc\version_4.7\demo\include\mpc_c.h
+	<GL/glut.h>
+	"definitions.h"
+
+924731306 d:\ufsm\disciplinas\estruturas de dados\programas\mpc\version_4.7\demo\include\gl\glut.h
+	<windows.h>
+	<GL/gl.h>
+	<GL/glu.h>
+
+1107059720 d:\ufsm\disciplinas\estruturas de dados\programas\mpc\version_4.7\demo\include\gl\gl.h
+
+1107059720 d:\ufsm\disciplinas\estruturas de dados\programas\mpc\version_4.7\demo\include\gl\glu.h
+	<stddef.h>
+	<GL/gl.h>
+
+1322679380 d:\ufsm\disciplinas\estruturas de dados\programas\mpc\version_4.7\demo\include\definitions.h
+
+1337886474 d:\ufsm\disciplinas\estruturas de dados\programas\mpc\version_4.7\demo\src\demo1.h
+	<string>
+
+1338230208 source:d:\ufsm\disciplinas\estruturas de dados\programas\mpc\version_4.7\demo\src\demo1.cpp
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"mpc_c.h"
+	"demo1.h"
+
+1337863474 source:d:\ufsm\disciplinas\estruturas de dados\programas\mpc\version_4.7\demo\src\main.cpp
+	"mpc_c.h"
+	"demo2.h"
+
+1359023438 d:\ufsm\disciplinas\estruturas de dados\programas\mpc\version_4.7\demo\src\demo2.h
+	<string>
+
+1337885062 source:c:\users\vinic\desktop\mpc\src\avancado.cpp
+	"mpc_c.h"
+	"demo1.h"
+	<math.h>
+
+1293057508 c:\users\vinic\desktop\mpc\include\mpc_c.h
+	<GL/glut.h>
+	"definitions.h"
+
+924731306 c:\users\vinic\desktop\mpc\include\gl\glut.h
+	<windows.h>
+	<GL/gl.h>
+	<GL/glu.h>
+
+1107059720 c:\users\vinic\desktop\mpc\include\gl\gl.h
+
+1107059720 c:\users\vinic\desktop\mpc\include\gl\glu.h
+	<stddef.h>
+	<GL/gl.h>
+
+1322679380 c:\users\vinic\desktop\mpc\include\definitions.h
+
+1337886474 c:\users\vinic\desktop\mpc\src\demo1.h
+	<string>
+
+1337863474 source:c:\users\vinic\desktop\mpc\src\main.cpp
+	"mpc_c.h"
+	"demo2.h"
+
+1359023438 c:\users\vinic\desktop\mpc\src\demo2.h
+	<string>
+
+1634788911 source:c:\users\vinic\desktop\mpc\src\demo1.cpp
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"mpc_c.h"
+	"demo1.h"
+
+1337885062 source:d:\downloads\mpc\src\avancado.cpp
+	"mpc_c.h"
+	"demo1.h"
+	<math.h>
+
+1293057508 d:\downloads\mpc\include\mpc_c.h
+	<GL/glut.h>
+	"definitions.h"
+
+924731306 d:\downloads\mpc\include\gl\glut.h
+	<windows.h>
+	<GL/gl.h>
+	<GL/glu.h>
+
+1107059720 d:\downloads\mpc\include\gl\gl.h
+
+1107059720 d:\downloads\mpc\include\gl\glu.h
+	<stddef.h>
+	<GL/gl.h>
+
+1322679380 d:\downloads\mpc\include\definitions.h
+
+1634876648 d:\downloads\mpc\src\demo1.h
+	<string>
+
+1337863474 source:d:\downloads\mpc\src\main.cpp
+	"mpc_c.h"
+	"demo2.h"
+
+1359023438 d:\downloads\mpc\src\demo2.h
+	<string>
+
+1634952111 source:d:\downloads\mpc\src\demo1.cpp
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"mpc_c.h"
+	"demo1.h"
+	<vector>
+	<iostream>
+
+1337885062 source:d:\documentos\github\text-box-mpc\src\avancado.cpp
+	"mpc_c.h"
+	"demo1.h"
+	<math.h>
+
+1293057508 d:\documentos\github\text-box-mpc\include\mpc_c.h
+	<GL/glut.h>
+	"definitions.h"
+
+924731306 d:\documentos\github\text-box-mpc\include\gl\glut.h
+	<windows.h>
+	<GL/gl.h>
+	<GL/glu.h>
+
+1107059720 d:\documentos\github\text-box-mpc\include\gl\gl.h
+
+1107059720 d:\documentos\github\text-box-mpc\include\gl\glu.h
+	<stddef.h>
+	<GL/gl.h>
+
+1635038211 d:\documentos\github\text-box-mpc\include\definitions.h
+
+1635219056 d:\documentos\github\text-box-mpc\src\demo1.h
+	<string>
+
+1635038206 source:d:\documentos\github\text-box-mpc\src\main.cpp
+	"mpc_c.h"
+	"demo1.h"
+
+1635291867 source:d:\documentos\github\text-box-mpc\src\demo1.cpp
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"mpc_c.h"
+	"demo1.h"
+	<vector>
+	<iostream>
+
