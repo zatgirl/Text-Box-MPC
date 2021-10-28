@@ -44,13 +44,15 @@ char box2g[103];
 char box2h[103];
 char box2i[103];
 
-int enter, del = 0, home = 0, endi = 0, backspace = 0, press = 0, k = 0;
+int enter, del = 0, home = 0, endi = 0, backspace = 0, press = 0;
 int left_press = 0, up_press = 0, down_press = 0, right_press = 0;
 int pos_linha = 0, pos_coluna = 0;
 
-int j = 0, keyPRESS, keytemp, quebra = 0, quebra2 = 0, linha = 1;
+int k = 0, j = 0, keyPRESS, keytemp, quebra = 0, quebra2 = 0, linha = 1;
 
-int box1 = 1, box2 = 0;
+int box1 = 0, box2 = 0;
+
+int selectedBox = 0;
 
 void initMpc(void){
 
@@ -65,32 +67,21 @@ void initMpc(void){
 
    mpcAbout();
 
-   criaImagens();
 }
 
 void displayApp(void){
-    //showBoxes();
+    showBoxes();       //Caixas relativas a matriz principal
+    //showBorders();     Deu errado, caixas dimensionadas por pixels
+    preencheTela();    //Habilita a leitura de ambas as caixas
+    showMouse();
+    selectBox();       //Habilita a escrita na caixa selecionada
+    //caixatexto1(1);
+    //caixatexto2(1);
 
-    showBorders();
-    preencheTela();
-    selectBox();
-    //caixatexto1();
-    //caixatexto2();
-    //showMouse();
 }
 
-void showBoxes(void){
-
-    //deu errado
-    //janela principal
-    //mpcHLine(top+20,left, right, RED_2, 1);
+void showBorders(void){
     mpcHLine(top,left, right, RED_2, 1);
-    /*for(int i = top;i<top+20;i++){
-        mpcHLine(i,left, right, WHITE, 1);
-
-    }*/
-
-    //mpcSetChar(3, 6, text, F_STD, 000, 000, 000, 255, 255, 255, 0);
     mostraTexto(3,7, caixa1);
 
     mpcHLine(bottom,left,right, RED_2, 1);
@@ -116,75 +107,15 @@ void showBoxes(void){
     mpcHLine(bottom-10,left+472,right-251, RED_2, 1);
     mpcVLine(left+472,top+350,bottom-10, RED_2, 1);
     mpcVLine(right-251,top+350,bottom-10, RED_2, 1);
-
-    //mpcSetChar(0, 1, 'a', F_STD, BLACK, YELLOW_5, 1 );
-
-
 }
 
-//faz o carregamento de um BMP, gera um grafico, copia uma imagem, faz o negativo e cria uma aleatoria, e define a area de recorte de figuras.
-//todas as funcoes que criam/carregam figuras retornam um ID, que deve ser usado para se referenciar a essa figura em chamadas subsequentes.
-void criaImagens(void){
-   int vet[] = {12, 4, 5, 1};
-   const char* legenda[] = {"Idade 1", "Idade 2" ,"Idade 3","Idade 4"};
-
-   //cria um grafico
-   ImgID[0] = mpcBuildGraph(vet, 4, "Grafico", "Eixo Y", legenda, GRAPH_MEDIUM);
-
-   //carrega uma imagem de arquivo
-   ImgID[1] = mpcLoadBmp("./resources/nvidia.bmp", CYAN_5); //path e cor de transparencia
-
-   //Faz uma copia da imagem com ID 0 para a imagem com ID 2
-   ImgID[2] = mpcCreateImg(mpcGetImg(ImgID[0]), mpcGetImgWidth(ImgID[0]), mpcGetImgHeight(ImgID[0]));
-
-   //cria uma imagem a partir de funcoes seno e cosseno
-   ImgID[3] = criaImg(300);
-
-   //Exemplo avancado - transforma uma imagem em seu negativo
-   negativoImg(ImgID[0]);
-
-   printf("\n\nDados da imagem com ID %d = %d %d %d", ImgID[0], mpcGetImgWidth(0), mpcGetImgHeight(0), mpcGetImgSize(0));
-   printf("\n\nDados da imagem com ID %d = %d %d %d", ImgID[1], mpcGetImgWidth(1), mpcGetImgHeight(1), mpcGetImgSize(1));
-   printf("\n\nDados da imagem com ID %d = %d %d %d", ImgID[2], mpcGetImgWidth(2), mpcGetImgHeight(2), mpcGetImgSize(2));
-   printf("\n\nDados da imagem com ID %d = %d %d %d", ImgID[3], mpcGetImgWidth(3), mpcGetImgHeight(3), mpcGetImgSize(3));
-
-
-   mpcSetClippingArea(0 , 0, APP_LINES-2, APP_COLUMNS-30);
-   mpcSetImgIdVisible(true);
-
-   //mpcDestroyImg(0);
-}
-//muda a cor da linha onde esta o cursor do mouse.
+//Indica onde está o cursor
 void showMouse(){
-   for (int c = 0, i = 0; c < APP_COLUMNS; c++, i++)
-      mpcSetChar(mouseY, c, i, F_STD, BLACK, RED_1, 1);
+   mpcSetCursorPos(pos_linha, pos_coluna);
 }
-//faz a movimentacao das imagens na tela.
-void animaImagens(){
-   imgX += direction;
-   if ((imgX + mpcGetImgWidth(id)/CHARACTER_WIDTH) >= APP_COLUMNS) {
-      direction = -1;
-      imgX = APP_COLUMNS - mpcGetImgWidth(id)/CHARACTER_WIDTH;
-   }
-   else if (imgX <= 0) {
-      direction = 1;
-      imgX = 0;
-   }
 
-   mpcShowImg(1, imgX, ImgID[id], 1.0);
-
-   mpcShowImg(APP_LINES - mpcGetImgHeight(ImgID[id])/CHARACTER_HEIGHT, APP_COLUMNS -
-         imgX - mpcGetImgWidth(ImgID[id])/CHARACTER_WIDTH, ImgID[id], alpha);
-
-   alpha += 0.02f;
-   if (alpha > 1.0)
-   {
-      id = (id+1)%4;
-      alpha = 0.0;
-   }
-}
-//desenha uma janela com moldura
-void showBorders(void){
+//Criação gráfica das janelas/caixas de texto
+void showBoxes(void){
 
    //janela principal fundo
    for (int x = 0; x < APP_COLUMNS; x++) {
@@ -296,155 +227,148 @@ void showBorders(void){
    //final segundo botao
 }
 
+//Função habilitando a escrita na caixa selecionada
 void selectBox (void){
-/*    if(mouseOnPress == 1){
-        if ((mouseY == 7) && ((mouseX > 12) && (mouseX < 115))){
-            box1 = 1;
-            printf("\nif 1");
-        }
-        if ((mouseY > 10) && (mouseY < 21) && ((mouseX > 12) && (mouseX < 115))){
-            box2 = 1;
-            printf("\nif 2");
-        }
-    }*/
-
-    if(box1 == 1){
-        printf("\nif box 1");
+    // se o mouse passar encima da caixa 1 e for clicado, a caixa 1 eh ativada
+    if ((mouseY == 7) && ((mouseX > 12) && (mouseX < 115))){
         if(mouseOnPress == 1){
-            if ((mouseY > 10) && (mouseY < 21) && ((mouseX > 12) && (mouseX < 115))){
-                box1 = 0;
-                box2 = 1;
-                printf("\nif box 1 mouse");
-            }
-        }   caixatexto1(keyPRESS);
+            selectedBox = 1;
+        }
     }
-    if(box2 == 1){
+    // se o mouse passar encima da caixa 2 e for clicado, a caixa 2 eh ativada
+    if ((mouseY > 10) && (mouseY < 21) && ((mouseX > 12) && (mouseX < 115))){
         if(mouseOnPress == 1){
-            printf("\nif box 2");
-            if ((mouseY == 7) && ((mouseX > 12) && (mouseX < 115))){
-                box1 = 1;
-                box2 = 0;
-                printf("\nif box 2 mouse");
-            }
-        }   caixatexto2();
+            selectedBox = 2;
+        }
+    }
+    if(selectedBox == 1){
+        caixatexto1(1);
+    }
+    if(selectedBox == 2){
+        caixatexto2(1);
     }
 }
 
-void caixatexto1(int keypress){
+//Funções relativas a caixa de uma linha
+void caixatexto1(int write){
+    if(write == 1 && k < 103){
      switch (keyPRESS) {
          case 97:
-            caixa1[j] = 'a';
-            j++;
+            caixa1[k] = 'a';
+            k++;
             break;
          case 98:
-            caixa1[j] = 'b';
-            j++;
+            caixa1[k] = 'b';
+            k++;
             break;
          case 99:
-            caixa1[j] = 'c';
-            j++;
+            caixa1[k] = 'c';
+            k++;
             break;
          case 100:
-            caixa1[j] = 'd';
-            j++;
+            caixa1[k] = 'd';
+            k++;
             break;
          case 101:
-            caixa1[j] = 'e';
-            j++;
+            caixa1[k] = 'e';
+            k++;
             break;
          case 102:
-            caixa1[j] = 'f';
-            j++;
+            caixa1[k] = 'f';
+            k++;
             break;
          case 103:
-            caixa1[j] = 'g';
-            j++;
+            caixa1[k] = 'g';
+            k++;
             break;
          case 104:
-            caixa1[j] = 'h';
-            j++;
+            caixa1[k] = 'h';
+            k++;
             break;
          case 105:
-            caixa1[j] = 'i';
-            j++;
+            caixa1[k] = 'i';
+            k++;
             break;
          case 106:
-            caixa1[j] = 'j';
-            j++;
+            caixa1[k] = 'j';
+            k++;
             break;
          case 107:
-            caixa1[j] = 'k';
-            j++;
+            caixa1[k] = 'k';
+            k++;
             break;
          case 108:
-            caixa1[j] = 'l';
-            j++;
+            caixa1[k] = 'l';
+            k++;
             break;
          case 109:
-            caixa1[j] = 'm';
-            j++;
+            caixa1[k] = 'm';
+            k++;
             break;
          case 110:
-            caixa1[j] = 'n';
-            j++;
+            caixa1[k] = 'n';
+            k++;
             break;
          case 111:
-            caixa1[j] = 'o';
-            j++;
+            caixa1[k] = 'o';
+            k++;
             break;
          case 112:
-            caixa1[j] = 'p';
-            j++;
+            caixa1[k] = 'p';
+            k++;
             break;
          case 113:
-            caixa1[j] = 'q';
-            j++;
+            caixa1[k] = 'q';
+            k++;
             break;
          case 114:
-            caixa1[j] = 'r';
-            j++;
+            caixa1[k] = 'r';
+            k++;
             break;
          case 115:
-            caixa1[j] = 's';
-            j++;
+            caixa1[k] = 's';
+            k++;
             break;
          case 116:
-            caixa1[j] = 't';
-            j++;
+            caixa1[k] = 't';
+            k++;
             break;
          case 117:
-            caixa1[j] = 'u';
-            j++;
+            caixa1[k] = 'u';
+            k++;
             break;
          case 118:
-            caixa1[j] = 'v';
-            j++;
+            caixa1[k] = 'v';
+            k++;
             break;
          case 119:
-            caixa1[j] = 'w';
-            j++;
+            caixa1[k] = 'w';
+            k++;
             break;
          case 120:
-            caixa1[j] = 'x';
-            j++;
+            caixa1[k] = 'x';
+            k++;
             break;
          case 121:
-            caixa1[j] = 'y';
-            j++;
+            caixa1[k] = 'y';
+            k++;
             break;
          case 122:
-            caixa1[j] = 'z';
-            j++;
+            caixa1[k] = 'z';
+            k++;
             break;
          case 32:
-            caixa1[j] = ' ';
-            j++;
+            caixa1[k] = ' ';
+            k++;
             break;
+        }
       }keyPRESS = 0;
-      mostraTexto(7,13,caixa1);
+      //mostraTexto(7,13,caixa1);
 }
 
-void caixatexto2(){
+//Funções relativas a caixa de várias linhas com teclas especiais
+void caixatexto2(int write){
+
     //Se a linha chegar ao final
     if(j == 103){
         quebra++;
@@ -452,73 +376,6 @@ void caixatexto2(){
         linha++;
         printf("\nFinal da linha %d", quebra);
     }
-    //Define os vetores a serem printados
-    switch (quebra) {
-        case 0:
-            mostraTexto(11, 13, box2a);
-            break;
-        case 1:
-            mostraTexto(11, 13, box2a);
-            mostraTexto(12, 13, box2b);
-            break;
-        case 2:
-            mostraTexto(11, 13, box2a);
-            mostraTexto(12, 13, box2b);
-            mostraTexto(13, 13, box2c);
-            break;
-        case 3:
-            mostraTexto(11, 13, box2a);
-            mostraTexto(12, 13, box2b);
-            mostraTexto(13, 13, box2c);
-            mostraTexto(14, 13, box2d);
-            break;
-        case 4:
-            mostraTexto(11, 13, box2a);
-            mostraTexto(12, 13, box2b);
-            mostraTexto(13, 13, box2c);
-            mostraTexto(14, 13, box2d);
-            mostraTexto(15, 13, box2e);
-            break;
-        case 5:
-            mostraTexto(11, 13, box2a);
-            mostraTexto(12, 13, box2b);
-            mostraTexto(13, 13, box2c);
-            mostraTexto(14, 13, box2d);
-            mostraTexto(15, 13, box2e);
-            mostraTexto(16, 13, box2f);
-            break;
-        case 6:
-            mostraTexto(11, 13, box2a);
-            mostraTexto(12, 13, box2b);
-            mostraTexto(13, 13, box2c);
-            mostraTexto(14, 13, box2d);
-            mostraTexto(15, 13, box2e);
-            mostraTexto(16, 13, box2f);
-            mostraTexto(17, 13, box2g);
-            break;
-        case 7:
-            mostraTexto(11, 13, box2a);
-            mostraTexto(12, 13, box2b);
-            mostraTexto(13, 13, box2c);
-            mostraTexto(14, 13, box2d);
-            mostraTexto(15, 13, box2e);
-            mostraTexto(16, 13, box2f);
-            mostraTexto(17, 13, box2g);
-            mostraTexto(18, 13, box2h);
-            //linha++;
-            break;
-        case 8:
-            mostraTexto(11, 13, box2a);
-            mostraTexto(12, 13, box2b);
-            mostraTexto(13, 13, box2c);
-            mostraTexto(14, 13, box2d);
-            mostraTexto(15, 13, box2e);
-            mostraTexto(16, 13, box2f);
-            mostraTexto(17, 13, box2g);
-            mostraTexto(18, 13, box2h);
-            mostraTexto(19, 13, box2i);
-            break;
-        }
     //Se for pressionado enter
     if(keyPRESS == 13){
         quebra2 += 1;
@@ -565,9 +422,20 @@ void caixatexto2(){
         keyPRESS = 0;
         right_press = 0;
     }
+    //mostra os vetores
+    /*mostraTexto(11, 13, box2a);
+    mostraTexto(12, 13, box2b);
+    mostraTexto(13, 13, box2c);
+    mostraTexto(14, 13, box2d);
+    mostraTexto(15, 13, box2e);
+    mostraTexto(16, 13, box2f);
+    mostraTexto(17, 13, box2g);
+    mostraTexto(18, 13, box2h);
+    mostraTexto(19, 13, box2i);*/
 
 }
 
+//Função que escreve na caixa de várias linhas, selecionada o vetor a ser escrito em caso de quebra de linha ou ENTER
 void preencheLinha(int keypress){
         if((quebra2 == 1) && (linha != 13)) {
         //enter++;
@@ -1629,8 +1497,19 @@ void preencheLinha(int keypress){
         }
 }
 }
-//preenche a tela com caracteres com transparencia em degrade.
+
+//Função habilitando a leitura em ambas as caixas
 void preencheTela(){
+    mostraTexto(7,13,caixa1);
+    mostraTexto(11, 13, box2a);
+    mostraTexto(12, 13, box2b);
+    mostraTexto(13, 13, box2c);
+    mostraTexto(14, 13, box2d);
+    mostraTexto(15, 13, box2e);
+    mostraTexto(16, 13, box2f);
+    mostraTexto(17, 13, box2g);
+    mostraTexto(18, 13, box2h);
+    mostraTexto(19, 13, box2i);
    //char texto[] = "Caixa de Texto";
    //mostraTexto(6, 30, texto);
    //mostraTexto(3, 57, "Caixa de Texto");
@@ -1639,7 +1518,7 @@ void preencheTela(){
    }*/
 }
 
-//funcao auxiliar para exibir strings na tela.
+//funcao para exibir strings na tela.
 void mostraTexto(int l, int c, char *text){
    for (int cont = 0; cont < strlen(text); cont++){
       mpcSetChar(l, c+cont, text[cont], F_N, BLACK, BLUE_2, 1 );
@@ -1668,7 +1547,7 @@ void cbKeyboard(int key, int modifier, bool special, bool up) {
      //salva o valor de key apenas enquanto a tecla eh pressionada, e nao for especial
      if((up == 0) && special != 1){
         keyPRESS = key;
-     }
+     }else keyPRESS = 0;
      //verifica se as teclas Home, End, Del e Backspace foram digitadas
      if((key == 106) && (special == 1) && (up == 0)){
         home++;

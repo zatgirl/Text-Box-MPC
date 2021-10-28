@@ -140,14 +140,14 @@
 
 1635038211 d:\documentos\github\text-box-mpc\include\definitions.h
 
-1635219056 d:\documentos\github\text-box-mpc\src\demo1.h
+1635308722 d:\documentos\github\text-box-mpc\src\demo1.h
 	<string>
 
 1635038206 source:d:\documentos\github\text-box-mpc\src\main.cpp
 	"mpc_c.h"
 	"demo1.h"
 
-1635291867 source:d:\documentos\github\text-box-mpc\src\demo1.cpp
+1635313326 source:d:\documentos\github\text-box-mpc\src\demo1.cpp
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -155,4 +155,42 @@
 	"demo1.h"
 	<vector>
 	<iostream>
+
+1337885062 source:c:\users\vinic\desktop\mpc\mpc2\text-box-mpc\src\avancado.cpp
+	"mpc_c.h"
+	"demo1.h"
+	<math.h>
+
+1293057508 c:\users\vinic\desktop\mpc\mpc2\text-box-mpc\include\mpc_c.h
+	<GL/glut.h>
+	"definitions.h"
+
+924731306 c:\users\vinic\desktop\mpc\mpc2\text-box-mpc\include\gl\glut.h
+	<windows.h>
+	<GL/gl.h>
+	<GL/glu.h>
+
+1107059720 c:\users\vinic\desktop\mpc\mpc2\text-box-mpc\include\gl\gl.h
+
+1107059720 c:\users\vinic\desktop\mpc\mpc2\text-box-mpc\include\gl\glu.h
+	<stddef.h>
+	<GL/gl.h>
+
+1635038211 c:\users\vinic\desktop\mpc\mpc2\text-box-mpc\include\definitions.h
+
+1635308722 c:\users\vinic\desktop\mpc\mpc2\text-box-mpc\src\demo1.h
+	<string>
+
+1635312235 source:c:\users\vinic\desktop\mpc\mpc2\text-box-mpc\src\demo1.cpp
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"mpc_c.h"
+	"demo1.h"
+	<vector>
+	<iostream>
+
+1635038206 source:c:\users\vinic\desktop\mpc\mpc2\text-box-mpc\src\main.cpp
+	"mpc_c.h"
+	"demo1.h"
 

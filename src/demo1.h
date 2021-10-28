@@ -28,8 +28,8 @@ void mostraTexto(int, int, char);
 void displayApp(void);
 
 void selectBox (void);
-void caixatexto1(int keypress);
-void caixatexto2(void);
+void caixatexto1(int write);
+void caixatexto2(int write);
 void preencheLinha(int keypress);
 
 void cbMouse(int l, int c, int button, int state);
