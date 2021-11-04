@@ -9,6 +9,7 @@
 
 int main(void)
 {
+   pS = new positionScreen;
    initMpc();
 
    mpcRun(29); //frames por segundo

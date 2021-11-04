@@ -54,6 +54,8 @@ int box1 = 0, box2 = 0;
 
 int selectedBox = 0;
 
+positionScreen *pS;
+
 void initMpc(void){
 
    mpcSetSize(APP_LINES, APP_COLUMNS);
@@ -70,14 +72,33 @@ void initMpc(void){
 }
 
 void displayApp(void){
-    showBoxes();       //Caixas relativas a matriz principal
-    //showBorders();     Deu errado, caixas dimensionadas por pixels
-    preencheTela();    //Habilita a leitura de ambas as caixas
+    carregaVariaveis();
+    showBoxes();        //Caixas relativas a matriz principal
+    //showBorders();      //Deu errado, caixas dimensionadas por pixels, caracteres fora da janela
+    screenReading();    //Habilita a leitura de ambas as caixas
     showMouse();
-    selectBox();       //Habilita a escrita na caixa selecionada
-    //caixatexto1(1);
-    //caixatexto2(1);
+    selectBox();        //Habilita a escrita na caixa selecionada
+    moveBox();
+    //textBox1(1);
+    //textBox2(1);
 
+}
+
+void carregaVariaveis(){
+    pS->screenPositionX = APP_COLUMNS;
+    pS->screenPositionY = APP_LINES;
+}
+
+//Movimenta a janela junto com todo o conteúdo
+void moveBox(){
+        if ((mouseY == 3) && ((mouseX > 6) && (mouseX < 122))){
+            if(mouseOnPress == 1){
+                pS->screenPositionX = mouseX;
+                pS->screenPositionY = mouseY;
+                printf("aq");
+            }
+
+        }
 }
 
 void showBorders(void){
@@ -118,8 +139,8 @@ void showMouse(){
 void showBoxes(void){
 
    //janela principal fundo
-   for (int x = 0; x < APP_COLUMNS; x++) {
-      for (int y = 0; y < APP_LINES; y++) {
+   for (int x = 0; x < pS->screenPositionX; x++) {
+      for (int y = 0; y < pS->screenPositionY; y++) {
          mpcSetChar(y,               x, 10, F_STD, GREY_5, GREY_4, 1.0); //fundo
       }
    }
@@ -242,15 +263,15 @@ void selectBox (void){
         }
     }
     if(selectedBox == 1){
-        caixatexto1(1);
+        textBox1(1);
     }
     if(selectedBox == 2){
-        caixatexto2(1);
+        textBox2(1);
     }
 }
 
 //Funções relativas a caixa de uma linha
-void caixatexto1(int write){
+void textBox1(int write){
     if(write == 1 && k < 103){
      switch (keyPRESS) {
          case 97:
@@ -367,7 +388,7 @@ void caixatexto1(int write){
 }
 
 //Funções relativas a caixa de várias linhas com teclas especiais
-void caixatexto2(int write){
+void textBox2(int write){
 
     //Se a linha chegar ao final
     if(j == 103){
@@ -1499,7 +1520,7 @@ void preencheLinha(int keypress){
 }
 
 //Função habilitando a leitura em ambas as caixas
-void preencheTela(){
+void screenReading(){
     mostraTexto(7,13,caixa1);
     mostraTexto(11, 13, box2a);
     mostraTexto(12, 13, box2b);
@@ -1517,6 +1538,7 @@ void preencheTela(){
         mpcSetChar(3, 57+cont, texto[cont], F_IN, WHITE, ORANGE_2, 1 );
    }*/
 }
+
 
 //funcao para exibir strings na tela.
 void mostraTexto(int l, int c, char *text){

@@ -8,6 +8,14 @@
 
 #include <string>
 
+class positionScreen{
+public:
+    int screenPositionX;
+    int screenPositionY;
+
+};
+extern positionScreen *pS;
+
 static const int APP_LINES = 35;
 static const int APP_COLUMNS = 128;
 
@@ -17,7 +25,7 @@ void initApp(void);
 void criaImagens(void);
 
 void showBorders(void);
-void preencheTela();
+void screenReading();
 void showMouse();
 void animaImagens();
 
@@ -28,9 +36,11 @@ void mostraTexto(int, int, char);
 void displayApp(void);
 
 void selectBox (void);
-void caixatexto1(int write);
-void caixatexto2(int write);
+void textBox1(int write);
+void textBox2(int write);
 void preencheLinha(int keypress);
+void moveBox();
+void carregaVariaveis();
 
 void cbMouse(int l, int c, int button, int state);
 
