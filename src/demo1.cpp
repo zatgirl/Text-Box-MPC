@@ -33,7 +33,7 @@ int right = 975;
 char janela_principal_linha[25];
 char janela_principal_coluna[113];
 
-char caixa1[103];
+/*char caixa1[103];
 char box2a[103];
 char box2b[103];
 char box2c[103];
@@ -42,7 +42,7 @@ char box2e[103];
 char box2f[103];
 char box2g[103];
 char box2h[103];
-char box2i[103];
+char box2i[103];*/
 
 int enter, del = 0, home = 0, endi = 0, backspace = 0, press = 0;
 int left_press = 0, up_press = 0, down_press = 0, right_press = 0;
@@ -55,6 +55,15 @@ int box1 = 0, box2 = 0;
 int selectedBox = 0;
 
 positionScreen *pS;
+box *a;
+box *b;
+box *c;
+box *d;
+box *e;
+box *f;
+box *g;
+box *h;
+box *i;
 
 void initMpc(void){
 
@@ -87,6 +96,16 @@ void displayApp(void){
 void carregaVariaveis(){
     pS->screenPositionX = APP_COLUMNS;
     pS->screenPositionY = APP_LINES;
+    a->box1[0] = '\0';
+    a->box1[0] = '\0';
+    b->box1[0] = '\0';
+    c->box1[0] = '\0';
+    d->box1[0] = '\0';
+    e->box1[0] = '\0';
+    f->box1[0] = '\0';
+    g->box1[0] = '\0';
+    h->box1[0] = '\0';
+    i->box1[0] = '\0';
 }
 
 //Movimenta a janela junto com todo o conteúdo
@@ -103,7 +122,7 @@ void moveBox(){
 
 void showBorders(void){
     mpcHLine(top,left, right, RED_2, 1);
-    mostraTexto(3,7, caixa1);
+    mostraTexto(3,7, a->box1);
 
     mpcHLine(bottom,left,right, RED_2, 1);
     mpcVLine(left,top,bottom, RED_2, 1);
@@ -161,14 +180,14 @@ void showBoxes(void){
    mpcSetChar(APP_LINES-5,             6, 13, F_STD, WHITE, WHITE, 1.0);
    mpcSetChar(APP_LINES-5, APP_COLUMNS-6, 14, F_STD, WHITE, WHITE, 1.0);
    char texto[] = "Caixa de Texto";
-   for(int cont = 0; cont < strlen(texto); cont++){
+   for(int cont = 0; cont < (int)strlen(texto); cont++){
         mpcSetChar(3, 57+cont, texto[cont], F_IN, WHITE, ORANGE_2, 1 );
    }
    //final caixa de texto
 
    //início caixa de texto 1
    char texto2[] = "Caixa de Texto com 1 linha:";
-   for(int cont = 0; cont < strlen(texto2); cont++){
+   for(int cont = 0; cont < (int)strlen(texto2); cont++){
         mpcSetChar(5, 12+cont, texto2[cont], F_N, BLACK, WHITE, 1 );
    }
    for (int x = 12; x < APP_COLUMNS - 12; x++) {
@@ -188,7 +207,7 @@ void showBoxes(void){
 
    //inicio caixa de texto 2
    char texto3[] = "Caixa de Texto com várias linhas:";
-   for(int cont = 0; cont < strlen(texto3); cont++){
+   for(int cont = 0; cont < (int)strlen(texto3); cont++){
         mpcSetChar(9, 12+cont, texto3[cont], F_N, BLACK, WHITE, 1 );
    }
    for (int x = 12; x < APP_COLUMNS - 12; x++) {
@@ -222,7 +241,7 @@ void showBoxes(void){
    mpcSetChar(APP_LINES-7,             37, 13, F_STD, BLACK, WHITE, 1.0);
    mpcSetChar(APP_LINES-7, APP_COLUMNS-66, 14, F_STD, BLACK, WHITE, 1.0);
    char texto4[] = ">       CANCELAR       <";
-   for(int cont = 0; cont < strlen(texto4); cont++){
+   for(int cont = 0; cont < (int)strlen(texto4); cont++){
         mpcSetChar(27, 38+cont, texto4[cont], F_N, BLACK, WHITE, 1 );
    }
    //final primeiro botao
@@ -242,7 +261,7 @@ void showBoxes(void){
    mpcSetChar(APP_LINES-7,             65, 13, F_STD, BLACK, WHITE, 1.0);
    mpcSetChar(APP_LINES-7, APP_COLUMNS-38, 14, F_STD, BLACK, WHITE, 1.0);
    char texto5[] = ">        ENVIAR        <";
-   for(int cont = 0; cont < strlen(texto5); cont++){
+   for(int cont = 0; cont < (int)strlen(texto5); cont++){
         mpcSetChar(27, 66+cont, texto5[cont], F_N, BLACK, WHITE, 1 );
    }
    //final segundo botao
@@ -275,111 +294,111 @@ void textBox1(int write){
     if(write == 1 && k < 103){
      switch (keyPRESS) {
          case 97:
-            caixa1[k] = 'a';
+            a->box1[k] = 'a';
             k++;
             break;
          case 98:
-            caixa1[k] = 'b';
+            a->box1[k] = 'b';
             k++;
             break;
          case 99:
-            caixa1[k] = 'c';
+            a->box1[k] = 'c';
             k++;
             break;
          case 100:
-            caixa1[k] = 'd';
+            a->box1[k] = 'd';
             k++;
             break;
          case 101:
-            caixa1[k] = 'e';
+            a->box1[k] = 'e';
             k++;
             break;
          case 102:
-            caixa1[k] = 'f';
+            a->box1[k] = 'f';
             k++;
             break;
          case 103:
-            caixa1[k] = 'g';
+            a->box1[k] = 'g';
             k++;
             break;
          case 104:
-            caixa1[k] = 'h';
+            a->box1[k] = 'h';
             k++;
             break;
          case 105:
-            caixa1[k] = 'i';
+            a->box1[k] = 'i';
             k++;
             break;
          case 106:
-            caixa1[k] = 'j';
+            a->box1[k] = 'j';
             k++;
             break;
          case 107:
-            caixa1[k] = 'k';
+            a->box1[k] = 'k';
             k++;
             break;
          case 108:
-            caixa1[k] = 'l';
+            a->box1[k] = 'l';
             k++;
             break;
          case 109:
-            caixa1[k] = 'm';
+            a->box1[k] = 'm';
             k++;
             break;
          case 110:
-            caixa1[k] = 'n';
+            a->box1[k] = 'n';
             k++;
             break;
          case 111:
-            caixa1[k] = 'o';
+            a->box1[k] = 'o';
             k++;
             break;
          case 112:
-            caixa1[k] = 'p';
+            a->box1[k] = 'p';
             k++;
             break;
          case 113:
-            caixa1[k] = 'q';
+            a->box1[k] = 'q';
             k++;
             break;
          case 114:
-            caixa1[k] = 'r';
+            a->box1[k] = 'r';
             k++;
             break;
          case 115:
-            caixa1[k] = 's';
+            a->box1[k] = 's';
             k++;
             break;
          case 116:
-            caixa1[k] = 't';
+            a->box1[k] = 't';
             k++;
             break;
          case 117:
-            caixa1[k] = 'u';
+            a->box1[k] = 'u';
             k++;
             break;
          case 118:
-            caixa1[k] = 'v';
+            a->box1[k] = 'v';
             k++;
             break;
          case 119:
-            caixa1[k] = 'w';
+            a->box1[k] = 'w';
             k++;
             break;
          case 120:
-            caixa1[k] = 'x';
+            a->box1[k] = 'x';
             k++;
             break;
          case 121:
-            caixa1[k] = 'y';
+            a->box1[k] = 'y';
             k++;
             break;
          case 122:
-            caixa1[k] = 'z';
+            a->box1[k] = 'z';
             k++;
             break;
          case 32:
-            caixa1[k] = ' ';
+            a->box1[k] = ' ';
             k++;
             break;
         }
@@ -461,42 +480,42 @@ void preencheLinha(int keypress){
         if((quebra2 == 1) && (linha != 13)) {
         //enter++;
         if(linha == 1){
-            mostraTexto(12, 13, box2b);
+            mostraTexto(12, 13, b->box2);
             quebra2 = 0;
             linha++;
         }
         if(linha == 2){
-            mostraTexto(13, 13, box2c);
+            mostraTexto(13, 13, c->box2);
             quebra2 = 0;
             linha++;
         }
         if(linha == 3){
-            mostraTexto(14, 13, box2d);
+            mostraTexto(14, 13, d->box2);
             quebra2 = 0;
             linha++;
         }
         if(linha == 4){
-            mostraTexto(15, 13, box2e);
+            mostraTexto(15, 13, e->box2);
             quebra2 = 0;
             linha++;
         }
         if(linha == 5){
-            mostraTexto(16, 13, box2f);
+            mostraTexto(16, 13, f->box2);
             quebra2 = 0;
             linha++;
         }
         if(linha == 6){
-            mostraTexto(17, 13, box2g);
+            mostraTexto(17, 13, g->box2);
             quebra2 = 0;
             linha++;
         }
         if(linha == 7){
-            mostraTexto(18, 13, box2h);
+            mostraTexto(18, 13, h->box2);
             quebra2 = 0;
             linha++;
         }
         if(linha == 8){
-            mostraTexto(19, 13, box2i);
+            mostraTexto(19, 13, i->box2);
             quebra2 = 0;
             linha++;
         }
@@ -504,112 +523,112 @@ void preencheLinha(int keypress){
     if(linha == 1){
         switch (keypress) {
              case 97:
-                box2a[j] = 'a';
+                a->box2[j] = 'a';
                 printf("\n %d", j);
                 j++;
                 break;
              case 98:
-                box2a[j] = 'b';
+                a->box2[j] = 'b';
                 j++;
                 break;
              case 99:
-                box2a[j] = 'c';
+                a->box2[j] = 'c';
                 j++;
                 break;
              case 100:
-                box2a[j] = 'd';
+                a->box2[j] = 'd';
                 j++;
                 break;
              case 101:
-                box2a[j] = 'e';
+                a->box2[j] = 'e';
                 j++;
                 break;
              case 102:
-                box2a[j] = 'f';
+                a->box2[j] = 'f';
                 j++;
                 break;
              case 103:
-                box2a[j] = 'g';
+                a->box2[j] = 'g';
                 j++;
                 break;
              case 104:
-                box2a[j] = 'h';
+                a->box2[j] = 'h';
                 j++;
                 break;
              case 105:
-                box2a[j] = 'i';
+                a->box2[j] = 'i';
                 j++;
                 break;
              case 106:
-                box2a[j] = 'j';
+                a->box2[j] = 'j';
                 j++;
                 break;
              case 107:
-                box2a[j] = 'k';
+                a->box2[j] = 'k';
                 j++;
                 break;
              case 108:
-                box2a[j] = 'l';
+                a->box2[j] = 'l';
                 j++;
                 break;
              case 109:
-                box2a[j] = 'm';
+                a->box2[j] = 'm';
                 j++;
                 break;
              case 110:
-                box2a[j] = 'n';
+                a->box2[j] = 'n';
                 j++;
                 break;
              case 111:
-                box2a[j] = 'o';
+                a->box2[j] = 'o';
                 j++;
                 break;
              case 112:
-                box2a[j] = 'p';
+                a->box2[j] = 'p';
                 j++;
                 break;
              case 113:
-                box2a[j] = 'q';
+                a->box2[j] = 'q';
                 j++;
                 break;
              case 114:
-                box2a[j] = 'r';
+                a->box2[j] = 'r';
                 j++;
                 break;
              case 115:
-                box2a[j] = 's';
+                a->box2[j] = 's';
                 j++;
                 break;
              case 116:
-                box2a[j] = 't';
+                a->box2[j] = 't';
                 j++;
                 break;
              case 117:
-                box2a[j] = 'u';
+                a->box2[j] = 'u';
                 j++;
                 break;
              case 118:
-                box2a[j] = 'v';
+                a->box2[j] = 'v';
                 j++;
                 break;
              case 119:
-                box2a[j] = 'w';
+                a->box2[j] = 'w';
                 j++;
                 break;
              case 120:
-                box2a[j] = 'x';
+                a->box2[j] = 'x';
                 j++;
                 break;
              case 121:
-                box2a[j] = 'y';
+                a->box2[j] = 'y';
                 j++;
                 break;
              case 122:
-                box2a[j] = 'z';
+                a->box2[j] = 'z';
                 j++;
                 break;
              case 32:
-                box2a[j] = ' ';
+                a->box2[j] = ' ';
                 j++;
                 break;
         } keypress = 0;
@@ -617,111 +636,111 @@ void preencheLinha(int keypress){
     if(linha == 2){
         switch (keypress) {
              case 97:
-                box2b[j] = 'a';
+                b->box2[j] = 'a';
                 j++;
                 break;
              case 98:
-                box2b[j] = 'b';
+                b->box2[j] = 'b';
                 j++;
                 break;
              case 99:
-                box2b[j] = 'c';
+                b->box2[j] = 'c';
                 j++;
                 break;
              case 100:
-                box2b[j] = 'd';
+                b->box2[j] = 'd';
                 j++;
                 break;
              case 101:
-                box2b[j] = 'e';
+                b->box2[j] = 'e';
                 j++;
                 break;
              case 102:
-                box2b[j] = 'f';
+                b->box2[j] = 'f';
                 j++;
                 break;
              case 103:
-                box2b[j] = 'g';
+                b->box2[j] = 'g';
                 j++;
                 break;
              case 104:
-                box2b[j] = 'h';
+                b->box2[j] = 'h';
                 j++;
                 break;
              case 105:
-                box2b[j] = 'i';
+                b->box2[j] = 'i';
                 j++;
                 break;
              case 106:
-                box2b[j] = 'j';
+                b->box2[j] = 'j';
                 j++;
                 break;
              case 107:
-                box2b[j] = 'k';
+                b->box2[j] = 'k';
                 j++;
                 break;
              case 108:
-                box2b[j] = 'l';
+                b->box2[j] = 'l';
                 j++;
                 break;
              case 109:
-                box2b[j] = 'm';
+                b->box2[j] = 'm';
                 j++;
                 break;
              case 110:
-                box2b[j] = 'n';
+                b->box2[j] = 'n';
                 j++;
                 break;
              case 111:
-                box2b[j] = 'o';
+                b->box2[j] = 'o';
                 j++;
                 break;
              case 112:
-                box2b[j] = 'p';
+                b->box2[j] = 'p';
                 j++;
                 break;
              case 113:
-                box2b[j] = 'q';
+                b->box2[j] = 'q';
                 j++;
                 break;
              case 114:
-                box2b[j] = 'r';
+                b->box2[j] = 'r';
                 j++;
                 break;
              case 115:
-                box2b[j] = 's';
+                b->box2[j] = 's';
                 j++;
                 break;
              case 116:
-                box2b[j] = 't';
+                b->box2[j] = 't';
                 j++;
                 break;
              case 117:
-                box2b[j] = 'u';
+                b->box2[j] = 'u';
                 j++;
                 break;
              case 118:
-                box2b[j] = 'v';
+                b->box2[j] = 'v';
                 j++;
                 break;
              case 119:
-                box2b[j] = 'w';
+                b->box2[j] = 'w';
                 j++;
                 break;
              case 120:
-                box2b[j] = 'x';
+                b->box2[j] = 'x';
                 j++;
                 break;
              case 121:
-                box2b[j] = 'y';
+                b->box2[j] = 'y';
                 j++;
                 break;
              case 122:
-                box2b[j] = 'z';
+                b->box2[j] = 'z';
                 j++;
                 break;
              case 32:
-                box2b[j] = ' ';
+                b->box2[j] = ' ';
                 j++;
                 break;
         } keypress = 0;
@@ -729,111 +748,111 @@ void preencheLinha(int keypress){
     if(linha == 3){
         switch (keypress) {
             case 97:
-                box2c[j] = 'a';
+                c->box2[j] = 'a';
                 j++;
                 break;
              case 98:
-                box2c[j] = 'b';
+                c->box2[j] = 'b';
                 j++;
                 break;
              case 99:
-                box2c[j] = 'c';
+                c->box2[j] = 'c';
                 j++;
                 break;
              case 100:
-                box2c[j] = 'd';
+                c->box2[j] = 'd';
                 j++;
                 break;
              case 101:
-                box2c[j] = 'e';
+                c->box2[j] = 'e';
                 j++;
                 break;
              case 102:
-                box2c[j] = 'f';
+                c->box2[j] = 'f';
                 j++;
                 break;
              case 103:
-                box2c[j] = 'g';
+                c->box2[j] = 'g';
                 j++;
                 break;
              case 104:
-                box2c[j] = 'h';
+                c->box2[j] = 'h';
                 j++;
                 break;
              case 105:
-                box2c[j] = 'i';
+                c->box2[j] = 'i';
                 j++;
                 break;
              case 106:
-                box2c[j] = 'j';
+                c->box2[j] = 'j';
                 j++;
                 break;
              case 107:
-                box2c[j] = 'k';
+                c->box2[j] = 'k';
                 j++;
                 break;
              case 108:
-                box2c[j] = 'l';
+                c->box2[j] = 'l';
                 j++;
                 break;
              case 109:
-                box2c[j] = 'm';
+                c->box2[j] = 'm';
                 j++;
                 break;
              case 110:
-                box2c[j] = 'n';
+                c->box2[j] = 'n';
                 j++;
                 break;
              case 111:
-                box2c[j] = 'o';
+                c->box2[j] = 'o';
                 j++;
                 break;
              case 112:
-                box2c[j] = 'p';
+                c->box2[j] = 'p';
                 j++;
                 break;
              case 113:
-                box2c[j] = 'q';
+                c->box2[j] = 'q';
                 j++;
                 break;
              case 114:
-                box2c[j] = 'r';
+                c->box2[j] = 'r';
                 j++;
                 break;
              case 115:
-                box2c[j] = 's';
+                c->box2[j] = 's';
                 j++;
                 break;
              case 116:
-                box2c[j] = 't';
+                c->box2[j] = 't';
                 j++;
                 break;
              case 117:
-                box2c[j] = 'u';
+                c->box2[j] = 'u';
                 j++;
                 break;
              case 118:
-                box2c[j] = 'v';
+                c->box2[j] = 'v';
                 j++;
                 break;
              case 119:
-                box2c[j] = 'w';
+                c->box2[j] = 'w';
                 j++;
                 break;
              case 120:
-                box2c[j] = 'x';
+                c->box2[j] = 'x';
                 j++;
                 break;
              case 121:
-                box2c[j] = 'y';
+                c->box2[j] = 'y';
                 j++;
                 break;
              case 122:
-                box2c[j] = 'z';
+                c->box2[j] = 'z';
                 j++;
                 break;
              case 32:
-                box2c[j] = ' ';
+                c->box2[j] = ' ';
                 j++;
                 break;
         } keypress = 0;
@@ -842,111 +861,111 @@ void preencheLinha(int keypress){
         switch (keypress) {
              case 97:
                 //preencheLinha(linha, j, 'a');
-                box2d[j] = 'a';
+                d->box2[j] = 'a';
                 j++;
                 break;
              case 98:
-                box2d[j] = 'b';
+                d->box2[j] = 'b';
                 j++;
                 break;
              case 99:
-                box2d[j] = 'c';
+                d->box2[j] = 'c';
                 j++;
                 break;
              case 100:
-                box2d[j] = 'd';
+                d->box2[j] = 'd';
                 j++;
                 break;
              case 101:
-                box2d[j] = 'e';
+                d->box2[j] = 'e';
                 j++;
                 break;
              case 102:
-                box2d[j] = 'f';
+                d->box2[j] = 'f';
                 j++;
                 break;
              case 103:
-                box2d[j] = 'g';
+                d->box2[j] = 'g';
                 j++;
                 break;
              case 104:
-                box2d[j] = 'h';
+                d->box2[j] = 'h';
                 j++;
                 break;
              case 105:
-                box2d[j] = 'i';
+                d->box2[j] = 'i';
                 j++;
                 break;
              case 106:
-                box2d[j] = 'j';
+                d->box2[j] = 'j';
                 j++;
                 break;
              case 107:
-                box2d[j] = 'k';
+                d->box2[j] = 'k';
                 j++;
                 break;
              case 108:
-                box2d[j] = 'l';
+                d->box2[j] = 'l';
                 j++;
                 break;
              case 109:
-                box2d[j] = 'm';
+                d->box2[j] = 'm';
                 j++;
                 break;
              case 110:
-                box2d[j] = 'n';
+                d->box2[j] = 'n';
                 j++;
                 break;
              case 111:
-                box2d[j] = 'o';
+                d->box2[j] = 'o';
                 j++;
                 break;
              case 112:
-                box2d[j] = 'p';
+                d->box2[j] = 'p';
                 j++;
                 break;
              case 113:
-                box2d[j] = 'q';
+                d->box2[j] = 'q';
                 j++;
                 break;
              case 114:
-                box2d[j] = 'r';
+                d->box2[j] = 'r';
                 j++;
                 break;
              case 115:
-                box2d[j] = 's';
+                d->box2[j] = 's';
                 j++;
                 break;
              case 116:
-                box2d[j] = 't';
+                d->box2[j] = 't';
                 j++;
                 break;
              case 117:
-                box2d[j] = 'u';
+                d->box2[j] = 'u';
                 j++;
                 break;
              case 118:
-                box2d[j] = 'v';
+                d->box2[j] = 'v';
                 j++;
                 break;
              case 119:
-                box2d[j] = 'w';
+                d->box2[j] = 'w';
                 j++;
                 break;
              case 120:
-                box2d[j] = 'x';
+                d->box2[j] = 'x';
                 j++;
                 break;
              case 121:
-                box2d[j] = 'y';
+                d->box2[j] = 'y';
                 j++;
                 break;
              case 122:
-                box2d[j] = 'z';
+                d->box2[j] = 'z';
                 j++;
                 break;
              case 32:
-                box2d[j] = ' ';
+                d->box2[j] = ' ';
                 j++;
                 break;
         } keypress = 0;
@@ -954,111 +973,111 @@ void preencheLinha(int keypress){
     if(linha == 5){
         switch (keypress) {
              case 97:
-                box2e[j] = 'a';
+                e->box2[j] = 'a';
                 j++;
                 break;
              case 98:
-                box2e[j] = 'b';
+                e->box2[j] = 'b';
                 j++;
                 break;
              case 99:
-                box2e[j] = 'c';
+                e->box2[j] = 'c';
                 j++;
                 break;
              case 100:
-                box2e[j] = 'd';
+                e->box2[j] = 'd';
                 j++;
                 break;
              case 101:
-                box2e[j] = 'e';
+                e->box2[j] = 'e';
                 j++;
                 break;
              case 102:
-                box2e[j] = 'f';
+                e->box2[j] = 'f';
                 j++;
                 break;
              case 103:
-                box2e[j] = 'g';
+                e->box2[j] = 'g';
                 j++;
                 break;
              case 104:
-                box2e[j] = 'h';
+                e->box2[j] = 'h';
                 j++;
                 break;
              case 105:
-                box2e[j] = 'i';
+                e->box2[j] = 'i';
                 j++;
                 break;
              case 106:
-                box2e[j] = 'j';
+                e->box2[j] = 'j';
                 j++;
                 break;
              case 107:
-                box2e[j] = 'k';
+                e->box2[j] = 'k';
                 j++;
                 break;
              case 108:
-                box2e[j] = 'l';
+                e->box2[j] = 'l';
                 j++;
                 break;
              case 109:
-                box2e[j] = 'm';
+                e->box2[j] = 'm';
                 j++;
                 break;
              case 110:
-                box2e[j] = 'n';
+                e->box2[j] = 'n';
                 j++;
                 break;
              case 111:
-                box2e[j] = 'o';
+                e->box2[j] = 'o';
                 j++;
                 break;
              case 112:
-                box2e[j] = 'p';
+                e->box2[j] = 'p';
                 j++;
                 break;
              case 113:
-                box2e[j] = 'q';
+                e->box2[j] = 'q';
                 j++;
                 break;
              case 114:
-                box2e[j] = 'r';
+                e->box2[j] = 'r';
                 j++;
                 break;
              case 115:
-                box2e[j] = 's';
+                e->box2[j] = 's';
                 j++;
                 break;
              case 116:
-                box2e[j] = 't';
+                e->box2[j] = 't';
                 j++;
                 break;
              case 117:
-                box2e[j] = 'u';
+                e->box2[j] = 'u';
                 j++;
                 break;
              case 118:
-                box2e[j] = 'v';
+                e->box2[j] = 'v';
                 j++;
                 break;
              case 119:
-                box2e[j] = 'w';
+                e->box2[j] = 'w';
                 j++;
                 break;
              case 120:
-                box2e[j] = 'x';
+                e->box2[j] = 'x';
                 j++;
                 break;
              case 121:
-                box2e[j] = 'y';
+                e->box2[j] = 'y';
                 j++;
                 break;
              case 122:
-                box2e[j] = 'z';
+                e->box2[j] = 'z';
                 j++;
                 break;
              case 32:
-                box2e[j] = ' ';
+                e->box2[j] = ' ';
                 j++;
                 break;
         } keypress = 0;
@@ -1066,111 +1085,111 @@ void preencheLinha(int keypress){
     if(linha == 6){
         switch (keypress) {
              case 97:
-                box2f[j] = 'a';
+                f->box2[j] = 'a';
                 j++;
                 break;
              case 98:
-                box2f[j] = 'b';
+                f->box2[j] = 'b';
                 j++;
                 break;
              case 99:
-                box2f[j] = 'c';
+                f->box2[j] = 'c';
                 j++;
                 break;
              case 100:
-                box2f[j] = 'd';
+                f->box2[j] = 'd';
                 j++;
                 break;
              case 101:
-                box2f[j] = 'e';
+                f->box2[j] = 'e';
                 j++;
                 break;
              case 102:
-                box2f[j] = 'f';
+                f->box2[j] = 'f';
                 j++;
                 break;
              case 103:
-                box2f[j] = 'g';
+                f->box2[j] = 'g';
                 j++;
                 break;
              case 104:
-                box2f[j] = 'h';
+                f->box2[j] = 'h';
                 j++;
                 break;
              case 105:
-                box2f[j] = 'i';
+                f->box2[j] = 'i';
                 j++;
                 break;
              case 106:
-                box2f[j] = 'j';
+                f->box2[j] = 'j';
                 j++;
                 break;
              case 107:
-                box2f[j] = 'k';
+                f->box2[j] = 'k';
                 j++;
                 break;
              case 108:
-                box2f[j] = 'l';
+                f->box2[j] = 'l';
                 j++;
                 break;
              case 109:
-                box2f[j] = 'm';
+                f->box2[j] = 'm';
                 j++;
                 break;
              case 110:
-                box2f[j] = 'n';
+                f->box2[j] = 'n';
                 j++;
                 break;
              case 111:
-                box2f[j] = 'o';
+                f->box2[j] = 'o';
                 j++;
                 break;
              case 112:
-                box2f[j] = 'p';
+                f->box2[j] = 'p';
                 j++;
                 break;
              case 113:
-                box2a[j] = 'q';
+                f->box2[j] = 'q';
                 j++;
                 break;
              case 114:
-                box2a[j] = 'r';
+                f->box2[j] = 'r';
                 j++;
                 break;
              case 115:
-                box2f[j] = 's';
+                f->box2[j] = 's';
                 j++;
                 break;
              case 116:
-                box2f[j] = 't';
+                f->box2[j] = 't';
                 j++;
                 break;
              case 117:
-                box2f[j] = 'u';
+                f->box2[j] = 'u';
                 j++;
                 break;
              case 118:
-                box2f[j] = 'v';
+                f->box2[j] = 'v';
                 j++;
                 break;
              case 119:
-                box2f[j] = 'w';
+                f->box2[j] = 'w';
                 j++;
                 break;
              case 120:
-                box2f[j] = 'x';
+                f->box2[j] = 'x';
                 j++;
                 break;
              case 121:
-                box2f[j] = 'y';
+                f->box2[j] = 'y';
                 j++;
                 break;
              case 122:
-                box2f[j] = 'z';
+                f->box2[j] = 'z';
                 j++;
                 break;
              case 32:
-                box2f[j] = ' ';
+                f->box2[j] = ' ';
                 j++;
                 break;
         } keypress = 0;
@@ -1178,111 +1197,111 @@ void preencheLinha(int keypress){
     if(linha == 7){
         switch (keypress) {
              case 97:
-                box2g[j] = 'a';
+                g->box2[j] = 'a';
                 j++;
                 break;
              case 98:
-                box2g[j] = 'b';
+                g->box2[j] = 'b';
                 j++;
                 break;
              case 99:
-                box2g[j] = 'c';
+                g->box2[j] = 'c';
                 j++;
                 break;
              case 100:
-                box2g[j] = 'd';
+                g->box2[j] = 'd';
                 j++;
                 break;
              case 101:
-                box2g[j] = 'e';
+                g->box2[j] = 'e';
                 j++;
                 break;
              case 102:
-                box2g[j] = 'f';
+                g->box2[j] = 'f';
                 j++;
                 break;
              case 103:
-                box2g[j] = 'g';
+                g->box2[j] = 'g';
                 j++;
                 break;
              case 104:
-                box2g[j] = 'h';
+                g->box2[j] = 'h';
                 j++;
                 break;
              case 105:
-                box2g[j] = 'i';
+                g->box2[j] = 'i';
                 j++;
                 break;
              case 106:
-                box2g[j] = 'j';
+                g->box2[j] = 'j';
                 j++;
                 break;
              case 107:
-                box2g[j] = 'k';
+                g->box2[j] = 'k';
                 j++;
                 break;
              case 108:
-                box2g[j] = 'l';
+                g->box2[j] = 'l';
                 j++;
                 break;
              case 109:
-                box2g[j] = 'm';
+                g->box2[j] = 'm';
                 j++;
                 break;
              case 110:
-                box2g[j] = 'n';
+                g->box2[j] = 'n';
                 j++;
                 break;
              case 111:
-                box2g[j] = 'o';
+                g->box2[j] = 'o';
                 j++;
                 break;
              case 112:
-                box2g[j] = 'p';
+                g->box2[j] = 'p';
                 j++;
                 break;
              case 113:
-                box2g[j] = 'q';
+                g->box2[j] = 'q';
                 j++;
                 break;
              case 114:
-                box2g[j] = 'r';
+                g->box2[j] = 'r';
                 j++;
                 break;
              case 115:
-                box2g[j] = 's';
+                g->box2[j] = 's';
                 j++;
                 break;
              case 116:
-                box2g[j] = 't';
+                g->box2[j] = 't';
                 j++;
                 break;
              case 117:
-                box2g[j] = 'u';
+                g->box2[j] = 'u';
                 j++;
                 break;
              case 118:
-                box2g[j] = 'v';
+                g->box2[j] = 'v';
                 j++;
                 break;
              case 119:
-                box2g[j] = 'w';
+                g->box2[j] = 'w';
                 j++;
                 break;
              case 120:
-                box2g[j] = 'x';
+                g->box2[j] = 'x';
                 j++;
                 break;
              case 121:
-                box2g[j] = 'y';
+                g->box2[j] = 'y';
                 j++;
                 break;
              case 122:
-                box2g[j] = 'z';
+                g->box2[j] = 'z';
                 j++;
                 break;
              case 32:
-                box2g[j] = ' ';
+                g->box2[j] = ' ';
                 j++;
                 break;
         } keypress = 0;
@@ -1291,111 +1310,111 @@ void preencheLinha(int keypress){
         switch (keypress) {
              case 97:
                 //preencheLinha(linha, j, 'a');
-                box2h[j] = 'a';
+                h->box2[j] = 'a';
                 j++;
                 break;
              case 98:
-                box2h[j] = 'b';
+                h->box2[j] = 'b';
                 j++;
                 break;
              case 99:
-                box2h[j] = 'c';
+                h->box2[j] = 'c';
                 j++;
                 break;
              case 100:
-                box2h[j] = 'd';
+                h->box2[j] = 'd';
                 j++;
                 break;
              case 101:
-                box2h[j] = 'e';
+                h->box2[j] = 'e';
                 j++;
                 break;
              case 102:
-                box2h[j] = 'f';
+                h->box2[j] = 'f';
                 j++;
                 break;
              case 103:
-                box2h[j] = 'g';
+                h->box2[j] = 'g';
                 j++;
                 break;
              case 104:
-                box2h[j] = 'h';
+                h->box2[j] = 'h';
                 j++;
                 break;
              case 105:
-                box2h[j] = 'i';
+                h->box2[j] = 'i';
                 j++;
                 break;
              case 106:
-                box2h[j] = 'j';
+                h->box2[j] = 'j';
                 j++;
                 break;
              case 107:
-                box2h[j] = 'k';
+                h->box2[j] = 'k';
                 j++;
                 break;
              case 108:
-                box2h[j] = 'l';
+                h->box2[j] = 'l';
                 j++;
                 break;
              case 109:
-                box2h[j] = 'm';
+                h->box2[j] = 'm';
                 j++;
                 break;
              case 110:
-                box2h[j] = 'n';
+                h->box2[j] = 'n';
                 j++;
                 break;
              case 111:
-                box2h[j] = 'o';
+                h->box2[j] = 'o';
                 j++;
                 break;
              case 112:
-                box2h[j] = 'p';
+                h->box2[j] = 'p';
                 j++;
                 break;
              case 113:
-                box2h[j] = 'q';
+                h->box2[j] = 'q';
                 j++;
                 break;
              case 114:
-                box2h[j] = 'r';
+                h->box2[j] = 'r';
                 j++;
                 break;
              case 115:
-                box2h[j] = 's';
+                h->box2[j] = 's';
                 j++;
                 break;
              case 116:
-                box2h[j] = 't';
+                h->box2[j] = 't';
                 j++;
                 break;
              case 117:
-                box2h[j] = 'u';
+                h->box2[j] = 'u';
                 j++;
                 break;
              case 118:
-                box2h[j] = 'v';
+                h->box2[j] = 'v';
                 j++;
                 break;
              case 119:
-                box2h[j] = 'w';
+                h->box2[j] = 'w';
                 j++;
                 break;
              case 120:
-                box2h[j] = 'x';
+                h->box2[j] = 'x';
                 j++;
                 break;
              case 121:
-                box2h[j] = 'y';
+                h->box2[j] = 'y';
                 j++;
                 break;
              case 122:
-                box2h[j] = 'z';
+                h->box2[j] = 'z';
                 j++;
                 break;
              case 32:
-                box2h[j] = ' ';
+                h->box2[j] = ' ';
                 j++;
                 break;
         } keypress = 0;
@@ -1404,111 +1423,111 @@ void preencheLinha(int keypress){
         switch (keypress) {
              case 97:
                 //preencheLinha(linha, j, 'a');
-                box2i[j] = 'a';
+                i->box1[j] = 'a';
                 j++;
                 break;
              case 98:
-                box2i[j] = 'b';
+                i->box1[j] = 'b';
                 j++;
                 break;
              case 99:
-                box2i[j] = 'c';
+                i->box1[j] = 'c';
                 j++;
                 break;
              case 100:
-                box2i[j] = 'd';
+                i->box1[j] = 'd';
                 j++;
                 break;
              case 101:
-                box2i[j] = 'e';
+                i->box1[j] = 'e';
                 j++;
                 break;
              case 102:
-                box2i[j] = 'f';
+                i->box1[j] = 'f';
                 j++;
                 break;
              case 103:
-                box2i[j] = 'g';
+                i->box1[j] = 'g';
                 j++;
                 break;
              case 104:
-                box2i[j] = 'h';
+                i->box1[j] = 'h';
                 j++;
                 break;
              case 105:
-                box2i[j] = 'i';
+                i->box1[j] = 'i';
                 j++;
                 break;
              case 106:
-                box2i[j] = 'j';
+                i->box1[j] = 'j';
                 j++;
                 break;
              case 107:
-                box2i[j] = 'k';
+                i->box1[j] = 'k';
                 j++;
                 break;
              case 108:
-                box2i[j] = 'l';
+                i->box1[j] = 'l';
                 j++;
                 break;
              case 109:
-                box2i[j] = 'm';
+                i->box1[j] = 'm';
                 j++;
                 break;
              case 110:
-                box2i[j] = 'n';
+                i->box1[j] = 'n';
                 j++;
                 break;
              case 111:
-                box2i[j] = 'o';
+                i->box1[j] = 'o';
                 j++;
                 break;
              case 112:
-                box2i[j] = 'p';
+                i->box1[j] = 'p';
                 j++;
                 break;
              case 113:
-                box2i[j] = 'q';
+                i->box1[j] = 'q';
                 j++;
                 break;
              case 114:
-                box2i[j] = 'r';
+                i->box1[j] = 'r';
                 j++;
                 break;
              case 115:
-                box2i[j] = 's';
+                i->box1[j] = 's';
                 j++;
                 break;
              case 116:
-                box2i[j] = 't';
+                i->box1[j] = 't';
                 j++;
                 break;
              case 117:
-                box2i[j] = 'u';
+                i->box1[j] = 'u';
                 j++;
                 break;
              case 118:
-                box2i[j] = 'v';
+                i->box1[j] = 'v';
                 j++;
                 break;
              case 119:
-                box2i[j] = 'w';
+                i->box1[j] = 'w';
                 j++;
                 break;
              case 120:
-                box2i[j] = 'x';
+                i->box1[j] = 'x';
                 j++;
                 break;
              case 121:
-                box2i[j] = 'y';
+                i->box1[j] = 'y';
                 j++;
                 break;
              case 122:
-                box2i[j] = 'z';
+                i->box1[j] = 'z';
                 j++;
                 break;
              case 32:
-                box2i[j] = ' ';
+                i->box1[j] = ' ';
                 j++;
                 break;
         } keypress = 0;
@@ -1521,16 +1540,16 @@ void preencheLinha(int keypress){
 
 //Função habilitando a leitura em ambas as caixas
 void screenReading(){
-    mostraTexto(7,13,caixa1);
-    mostraTexto(11, 13, box2a);
-    mostraTexto(12, 13, box2b);
-    mostraTexto(13, 13, box2c);
-    mostraTexto(14, 13, box2d);
-    mostraTexto(15, 13, box2e);
-    mostraTexto(16, 13, box2f);
-    mostraTexto(17, 13, box2g);
-    mostraTexto(18, 13, box2h);
-    mostraTexto(19, 13, box2i);
+    mostraTexto(7,13,a->box1);
+    mostraTexto(11, 13, a->box2);
+    mostraTexto(12, 13, b->box2);
+    mostraTexto(13, 13, c->box2);
+    mostraTexto(14, 13, d->box2);
+    mostraTexto(15, 13, e->box2);
+    mostraTexto(16, 13, f->box2);
+    mostraTexto(17, 13, g->box2);
+    mostraTexto(18, 13, h->box2);
+    mostraTexto(19, 13, i->box2);
    //char texto[] = "Caixa de Texto";
    //mostraTexto(6, 30, texto);
    //mostraTexto(3, 57, "Caixa de Texto");
@@ -1542,7 +1561,7 @@ void screenReading(){
 
 //funcao para exibir strings na tela.
 void mostraTexto(int l, int c, char *text){
-   for (int cont = 0; cont < strlen(text); cont++){
+   for (int cont = 0; cont < (int)strlen(text); cont++){
       mpcSetChar(l, c+cont, text[cont], F_N, BLACK, BLUE_2, 1 );
       pos_linha = l;
       pos_coluna = c + j;
@@ -1584,20 +1603,20 @@ void cbKeyboard(int key, int modifier, bool special, bool up) {
             //Se for pressionado End
             if(endi == 1) {
                 mpcSetCursorPos(pos_linha, pos_coluna);
-                if(pos_linha = 11){
-                    mostraTexto(pos_linha, pos_coluna, box2a);
+                if((pos_linha = 11)){
+                    mostraTexto(pos_linha, pos_coluna, a->box2);
                 }
-                if(pos_linha = 12){
-                    mostraTexto(pos_linha, pos_coluna, box2b);
+                if((pos_linha = 12)){
+                    mostraTexto(pos_linha, pos_coluna, b->box2);
                 }
-                if(pos_linha = 13){
-                    mostraTexto(pos_linha, pos_coluna, box2c);
+                if((pos_linha = 13)){
+                    mostraTexto(pos_linha, pos_coluna, c->box2);
                 }
-                if(pos_linha = 14){
-                    mostraTexto(pos_linha, pos_coluna, box2d);
+                if((pos_linha = 14)){
+                    mostraTexto(pos_linha, pos_coluna, d->box2);
                 }
-                if(pos_linha = 15){
-                    mostraTexto(pos_linha, pos_coluna, box2e);
+                if((pos_linha = 15)){
+                    mostraTexto(pos_linha, pos_coluna, e->box2);
                 }
                 endi = 0;
             }

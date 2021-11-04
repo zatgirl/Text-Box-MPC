@@ -39,6 +39,7 @@ static const int F_SNI = 7;
 static const int F_INS = 7;
 static const int F_ISN = 7;
 
+
 // mpc colors
 #define BLACK     000, 000, 000
 #define GREY_1    204, 204, 204

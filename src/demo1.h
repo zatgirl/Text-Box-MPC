@@ -16,6 +16,22 @@ public:
 };
 extern positionScreen *pS;
 
+class box{
+public:
+    char box1[103];
+    char box2[103];
+
+};
+extern box *a;
+extern box *b;
+extern box *c;
+extern box *d;
+extern box *e;
+extern box *f;
+extern box *g;
+extern box *h;
+extern box *i;
+
 static const int APP_LINES = 35;
 static const int APP_COLUMNS = 128;
 
@@ -24,30 +40,24 @@ void initApp(void);
 
 void criaImagens(void);
 
-void showBorders(void);
-void screenReading();
 void showMouse();
 void animaImagens();
 
 void displayApp(void);
+void showBorders(void);
 void showBoxes(void);
-void mostraTexto(int, int, char);
-
-void displayApp(void);
-
+void carregaVariaveis();
+void moveBox();
 void selectBox (void);
 void textBox1(int write);
 void textBox2(int write);
 void preencheLinha(int keypress);
-void moveBox();
-void carregaVariaveis();
+void screenReading();
+void mostraTexto(int, int, char);
 
 void cbMouse(int l, int c, int button, int state);
-
 void cbKeyboard(int key, int modifier, bool special, bool up);
-
 void cbUpdate(void);
-
 void mostraTexto(int l, int c, char *msg);
 
 

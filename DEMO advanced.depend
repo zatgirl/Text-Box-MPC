@@ -194,3 +194,41 @@
 	"mpc_c.h"
 	"demo1.h"
 
+1636046488 source:c:\users\maure\documents\github\text-box-mpc\src\avancado.cpp
+	"mpc_c.h"
+	"demo1.h"
+	<math.h>
+
+1636046488 c:\users\maure\documents\github\text-box-mpc\include\mpc_c.h
+	<GL/glut.h>
+	"definitions.h"
+
+1636046488 c:\users\maure\documents\github\text-box-mpc\include\gl\glut.h
+	<windows.h>
+	<GL/gl.h>
+	<GL/glu.h>
+
+1636046488 c:\users\maure\documents\github\text-box-mpc\include\gl\gl.h
+
+1636046488 c:\users\maure\documents\github\text-box-mpc\include\gl\glu.h
+	<stddef.h>
+	<GL/gl.h>
+
+1636052728 c:\users\maure\documents\github\text-box-mpc\include\definitions.h
+
+1636052800 c:\users\maure\documents\github\text-box-mpc\src\demo1.h
+	<string>
+
+1636052972 source:c:\users\maure\documents\github\text-box-mpc\src\demo1.cpp
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"mpc_c.h"
+	"demo1.h"
+	<vector>
+	<iostream>
+
+1636052800 source:c:\users\maure\documents\github\text-box-mpc\src\main.cpp
+	"mpc_c.h"
+	"demo1.h"
+

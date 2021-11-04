@@ -10,6 +10,15 @@
 int main(void)
 {
    pS = new positionScreen;
+   a = new box;
+   b = new box;
+   c = new box;
+   d = new box;
+   e = new box;
+   f = new box;
+   g = new box;
+   h = new box;
+   i = new box;
    initMpc();
 
    mpcRun(29); //frames por segundo
