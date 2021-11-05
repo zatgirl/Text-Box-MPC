@@ -15,6 +15,16 @@ public:
 };
 extern positionScreen *pS;
 
+class borders{
+public:
+    int top = 50;
+    int bottom = 450;
+    int left = 50;
+    int right = 975;
+};
+extern borders *border;
+
+
 class box{
 public:
     char box1[103] = {0};

@@ -41,6 +41,8 @@ int selectedBox = 0;
 
 positionScreen *pS;
 
+borders *border;
+
 box *a; box *b; box *c; box *d; box *e; box *f; box *g; box *h; box *i;
 
 mainWindow *line; mainWindow *col;
@@ -93,32 +95,32 @@ void moveBox(){
 }
 
 void showBorders(void){
-    mpcHLine(top,left, right, RED_2, 1);
+    mpcHLine(border->top, border->left, border->right, RED_2, 1);
     mostraTexto(3,7, a->box1);
 
-    mpcHLine(bottom,left,right, RED_2, 1);
-    mpcVLine(left,top,bottom, RED_2, 1);
-    mpcVLine(right,top,bottom, RED_2, 1);
+    mpcHLine(border->bottom, border->left,  border->right, RED_2, 1);
+    mpcVLine(  border->left,  border->top, border->bottom, RED_2, 1);
+    mpcVLine( border->right,  border->top, border->bottom, RED_2, 1);
     //caixa de texto 1 linha
-    mpcHLine(top+50,left+50, right-50, RED_2, 1);
-    mpcHLine(bottom-330,left+50,right-50, RED_2, 1);
-    mpcVLine(left+50,top+50,bottom-330, RED_2, 1);
-    mpcVLine(right-50,top+50,bottom-330, RED_2, 1);
+    mpcHLine(    border->top+50, border->left+50,  border->right-50, RED_2, 1);
+    mpcHLine(border->bottom-330, border->left+50,  border->right-50, RED_2, 1);
+    mpcVLine(   border->left+50, border->top+50, border->bottom-330, RED_2, 1);
+    mpcVLine(  border->right-50, border->top+50, border->bottom-330, RED_2, 1);
     //caixa de texto multi linhas
-    mpcHLine(top+100,left+50, right-50, RED_2, 1);
-    mpcHLine(bottom-150,left+50,right-50, RED_2, 1);
-    mpcVLine(left+50,top+100,bottom-150, RED_2, 1);
-    mpcVLine(right-50,top+100,bottom-150, RED_2, 1);
+    mpcHLine(   border->top+100, border->left+50,   border->right-50, RED_2, 1);
+    mpcHLine(border->bottom-150, border->left+50,   border->right-50, RED_2, 1);
+    mpcVLine(   border->left+50, border->top+100, border->bottom-150, RED_2, 1);
+    mpcVLine(  border->right-50, border->top+100, border->bottom-150, RED_2, 1);
     //botao 1
-    mpcHLine(top+350,left+250, right-473, RED_2, 1);
-    mpcHLine(bottom-10,left+250,right-473, RED_2, 1);
-    mpcVLine(left+250,top+350,bottom-10, RED_2, 1);
-    mpcVLine(right-473,top+350,bottom-10, RED_2, 1);
+    mpcHLine(  border->top+350, border->left+250, border->right-473, RED_2, 1);
+    mpcHLine(border->bottom-10, border->left+250, border->right-473, RED_2, 1);
+    mpcVLine( border->left+250,  border->top+350, border->bottom-10, RED_2, 1);
+    mpcVLine(border->right-473,  border->top+350, border->bottom-10, RED_2, 1);
     //botao 2
-    mpcHLine(top+350,left+472, right-251, RED_2, 1);
-    mpcHLine(bottom-10,left+472,right-251, RED_2, 1);
-    mpcVLine(left+472,top+350,bottom-10, RED_2, 1);
-    mpcVLine(right-251,top+350,bottom-10, RED_2, 1);
+    mpcHLine(  border->top+350, border->left+472, border->right-251, RED_2, 1);
+    mpcHLine(border->bottom-10, border->left+472, border->right-251, RED_2, 1);
+    mpcVLine( border->left+472, border->top+350,  border->bottom-10, RED_2, 1);
+    mpcVLine(border->right-251, border->top+350,  border->bottom-10, RED_2, 1);
 }
 
 //Indica onde está o cursor
