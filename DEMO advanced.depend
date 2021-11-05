@@ -138,16 +138,16 @@
 	<stddef.h>
 	<GL/gl.h>
 
-1635038211 d:\documentos\github\text-box-mpc\include\definitions.h
+1636064851 d:\documentos\github\text-box-mpc\include\definitions.h
 
-1636035618 d:\documentos\github\text-box-mpc\src\demo1.h
+1636074052 d:\documentos\github\text-box-mpc\src\demo1.h
 	<string>
 
-1636035618 source:d:\documentos\github\text-box-mpc\src\main.cpp
+1636073713 source:d:\documentos\github\text-box-mpc\src\main.cpp
 	"mpc_c.h"
 	"demo1.h"
 
-1636035627 source:d:\documentos\github\text-box-mpc\src\demo1.cpp
+1636072530 source:d:\documentos\github\text-box-mpc\src\demo1.cpp
 	<stdio.h>
 	<stdlib.h>
 	<string.h>

@@ -30,40 +30,22 @@ int left = 50;
 int right = 975;
 
 //preenchimento
-char janela_principal_linha[25];
-char janela_principal_coluna[113];
+/*char line->lineY[25];
+char [113];*/
 
-/*char caixa1[103];
-char box2a[103];
-char box2b[103];
-char box2c[103];
-char box2d[103];
-char box2e[103];
-char box2f[103];
-char box2g[103];
-char box2h[103];
-char box2i[103];*/
-
-int enter, del = 0, home = 0, endi = 0, backspace = 0, press = 0;
-int left_press = 0, up_press = 0, down_press = 0, right_press = 0;
 int pos_linha = 0, pos_coluna = 0;
 
 int k = 0, j = 0, keyPRESS, keytemp, quebra = 0, quebra2 = 0, linha = 1;
 
-int box1 = 0, box2 = 0;
-
 int selectedBox = 0;
 
 positionScreen *pS;
-box *a;
-box *b;
-box *c;
-box *d;
-box *e;
-box *f;
-box *g;
-box *h;
-box *i;
+
+box *a; box *b; box *c; box *d; box *e; box *f; box *g; box *h; box *i;
+
+mainWindow *line; mainWindow *col;
+
+keySpecial *press;
 
 void initMpc(void){
 
@@ -96,16 +78,6 @@ void displayApp(void){
 void carregaVariaveis(){
     pS->screenPositionX = APP_COLUMNS;
     pS->screenPositionY = APP_LINES;
-    a->box1[0] = '\0';
-    a->box1[0] = '\0';
-    b->box1[0] = '\0';
-    c->box1[0] = '\0';
-    d->box1[0] = '\0';
-    e->box1[0] = '\0';
-    f->box1[0] = '\0';
-    g->box1[0] = '\0';
-    h->box1[0] = '\0';
-    i->box1[0] = '\0';
 }
 
 //Movimenta a janela junto com todo o conteúdo
@@ -166,19 +138,19 @@ void showBoxes(void){
    //final janela principal
 
    //caixa de texto
-   for (int x = 6; x < APP_COLUMNS-5; x++) {
+   for (int x = 6; x < pS->screenPositionX-5; x++) {
       mpcSetChar(            3,               x, 9, F_STD, WHITE, ORANGE_2, 1.0); //cima
-      mpcSetChar(APP_LINES - 5, APP_COLUMNS - x, 9, F_STD, WHITE, WHITE, 1.0); //baixo
-          for (int y = 4; y < APP_LINES-5; y++) {
+      mpcSetChar(pS->screenPositionY - 5, pS->screenPositionX - x, 9, F_STD, WHITE, WHITE, 1.0); //baixo
+          for (int y = 4; y < pS->screenPositionY-5; y++) {
              mpcSetChar(y,               x, 10, F_STD, WHITE,  WHITE, 1.0); //fundo
              mpcSetChar(y,               6, 10, F_STD, WHITE,  WHITE, 1.0); //esq
-             mpcSetChar(y, APP_COLUMNS - 6, 10, F_STD, WHITE,  WHITE, 1.0); //dir
+             mpcSetChar(y, pS->screenPositionX - 6, 10, F_STD, WHITE,  WHITE, 1.0); //dir
           }
    }
    mpcSetChar(          3,             6, 11, F_STD, WHITE, ORANGE_2, 1.0);
-   mpcSetChar(          3, APP_COLUMNS-6, 12, F_STD, WHITE, ORANGE_2, 1.0);
-   mpcSetChar(APP_LINES-5,             6, 13, F_STD, WHITE, WHITE, 1.0);
-   mpcSetChar(APP_LINES-5, APP_COLUMNS-6, 14, F_STD, WHITE, WHITE, 1.0);
+   mpcSetChar(          3, pS->screenPositionX-6, 12, F_STD, WHITE, ORANGE_2, 1.0);
+   mpcSetChar(pS->screenPositionY-5,             6, 13, F_STD, WHITE, WHITE, 1.0);
+   mpcSetChar(pS->screenPositionY-5, pS->screenPositionX-6, 14, F_STD, WHITE, WHITE, 1.0);
    char texto[] = "Caixa de Texto";
    for(int cont = 0; cont < (int)strlen(texto); cont++){
         mpcSetChar(3, 57+cont, texto[cont], F_IN, WHITE, ORANGE_2, 1 );
@@ -190,19 +162,19 @@ void showBoxes(void){
    for(int cont = 0; cont < (int)strlen(texto2); cont++){
         mpcSetChar(5, 12+cont, texto2[cont], F_N, BLACK, WHITE, 1 );
    }
-   for (int x = 12; x < APP_COLUMNS - 12; x++) {
+   for (int x = 12; x < pS->screenPositionX - 12; x++) {
       mpcSetChar(             6,               x, 9, F_STD, BLACK, BLUE_2, 1.0); //cima
-      mpcSetChar(APP_LINES - 27, APP_COLUMNS - x, 9, F_STD, BLACK, BLUE_2, 1.0); //baixo
-          for (int y = 6; y < APP_LINES-27; y++) {
+      mpcSetChar(pS->screenPositionY - 27, pS->screenPositionX - x, 9, F_STD, BLACK, BLUE_2, 1.0); //baixo
+          for (int y = 6; y < pS->screenPositionY-27; y++) {
              mpcSetChar(7,                x, 10, F_STD, BLUE_2,  BLUE_2, 1.0); //fundo
              mpcSetChar(y,               12, 10, F_STD,  BLACK, BLUE_2, 1.0); //esq
-             mpcSetChar(y, APP_COLUMNS - 12, 10, F_STD,  BLACK, BLUE_2, 1.0); //dir
+             mpcSetChar(y, pS->screenPositionX - 12, 10, F_STD,  BLACK, BLUE_2, 1.0); //dir
           }
    }
    mpcSetChar(           6,             12, 11, F_STD, BLACK, BLUE_2, 1.0);
-   mpcSetChar(           6, APP_COLUMNS-12, 12, F_STD, BLACK, BLUE_2, 1.0);
-   mpcSetChar(APP_LINES-27,             12, 13, F_STD, BLACK, BLUE_2, 1.0);
-   mpcSetChar(APP_LINES-27, APP_COLUMNS-12, 14, F_STD, BLACK, BLUE_2, 1.0);
+   mpcSetChar(           6, pS->screenPositionX-12, 12, F_STD, BLACK, BLUE_2, 1.0);
+   mpcSetChar(pS->screenPositionY-27,             12, 13, F_STD, BLACK, BLUE_2, 1.0);
+   mpcSetChar(pS->screenPositionY-27, pS->screenPositionX-12, 14, F_STD, BLACK, BLUE_2, 1.0);
    //final caixa de texto 1
 
    //inicio caixa de texto 2
@@ -210,36 +182,36 @@ void showBoxes(void){
    for(int cont = 0; cont < (int)strlen(texto3); cont++){
         mpcSetChar(9, 12+cont, texto3[cont], F_N, BLACK, WHITE, 1 );
    }
-   for (int x = 12; x < APP_COLUMNS - 12; x++) {
+   for (int x = 12; x < pS->screenPositionX - 12; x++) {
       mpcSetChar(            10,               x, 9, F_STD, BLACK, BLUE_2, 1.0); //cima
-      //mpcSetChar(APP_LINES - 15, APP_COLUMNS - x, 9, F_STD, GREY_2, GREY_2, 1.0); //baixo
-          for (int y = 10; y < APP_LINES-15; y++) {
+      //mpcSetChar(screenPositionY - 15, screenPositionX - x, 9, F_STD, GREY_2, GREY_2, 1.0); //baixo
+          for (int y = 10; y < pS->screenPositionY-15; y++) {
              mpcSetChar(y+1,                x, 10, F_STD,  BLUE_2,  BLUE_2, 1.0); //fundo
              mpcSetChar(20, x, 9, F_STD, BLACK, BLUE_2, 1.0); //baixo
              mpcSetChar(y,               12, 10, F_STD, BLACK, BLUE_2, 1.0); //esq
-             mpcSetChar(y, APP_COLUMNS - 12, 10, F_STD, BLACK, BLUE_2, 1.0); //dir
+             mpcSetChar(y, pS->screenPositionX - 12, 10, F_STD, BLACK, BLUE_2, 1.0); //dir
           }
    }
    mpcSetChar(          10,             12, 11, F_STD, BLACK, BLUE_2, 1.0);
-   mpcSetChar(          10, APP_COLUMNS-12, 12, F_STD, BLACK, BLUE_2, 1.0);
-   mpcSetChar(APP_LINES-15,             12, 13, F_STD, BLACK, BLUE_2, 1.0);
-   mpcSetChar(APP_LINES-15, APP_COLUMNS-12, 14, F_STD, BLACK, BLUE_2, 1.0);
+   mpcSetChar(          10, pS->screenPositionX-12, 12, F_STD, BLACK, BLUE_2, 1.0);
+   mpcSetChar(pS->screenPositionY-15,             12, 13, F_STD, BLACK, BLUE_2, 1.0);
+   mpcSetChar(pS->screenPositionY-15, pS->screenPositionX-12, 14, F_STD, BLACK, BLUE_2, 1.0);
    //final caixa de texto 2
 
    //início primeiro botao
-   for (int x = 37; x < APP_COLUMNS - 65; x++) {
+   for (int x = 37; x < pS->screenPositionX - 65; x++) {
       mpcSetChar(           25,                    x, 9, F_STD, BLACK, WHITE, 1.0); //cima
-      mpcSetChar(APP_LINES - 7, APP_COLUMNS - x - 29, 9, F_STD, BLACK, WHITE, 1.0); //baixo
-          for (int y = 26; y < APP_LINES-7; y++) {
+      mpcSetChar(pS->screenPositionY - 7, pS->screenPositionX - x - 29, 9, F_STD, BLACK, WHITE, 1.0); //baixo
+          for (int y = 26; y < pS->screenPositionY-7; y++) {
              mpcSetChar(y,                x, 10, F_STD, WHITE, WHITE, 1.0); //fundo
              mpcSetChar(y,               37, 10, F_STD, BLACK, WHITE, 1.0); //esq
-             mpcSetChar(y, APP_COLUMNS - 66, 10, F_STD, BLACK, WHITE, 1.0); //dir
+             mpcSetChar(y, pS->screenPositionX - 66, 10, F_STD, BLACK, WHITE, 1.0); //dir
           }
    }
    mpcSetChar(         25,             37, 11, F_STD, BLACK, WHITE, 1.0);
-   mpcSetChar(         25, APP_COLUMNS-66, 12, F_STD, BLACK, WHITE, 1.0);
-   mpcSetChar(APP_LINES-7,             37, 13, F_STD, BLACK, WHITE, 1.0);
-   mpcSetChar(APP_LINES-7, APP_COLUMNS-66, 14, F_STD, BLACK, WHITE, 1.0);
+   mpcSetChar(         25, pS->screenPositionX-66, 12, F_STD, BLACK, WHITE, 1.0);
+   mpcSetChar(pS->screenPositionY-7,             37, 13, F_STD, BLACK, WHITE, 1.0);
+   mpcSetChar(pS->screenPositionY-7, pS->screenPositionX-66, 14, F_STD, BLACK, WHITE, 1.0);
    char texto4[] = ">       CANCELAR       <";
    for(int cont = 0; cont < (int)strlen(texto4); cont++){
         mpcSetChar(27, 38+cont, texto4[cont], F_N, BLACK, WHITE, 1 );
@@ -247,19 +219,19 @@ void showBoxes(void){
    //final primeiro botao
 
    //segundo botao
-   for (int x = 65; x < APP_COLUMNS - 37; x++) {
+   for (int x = 65; x < pS->screenPositionX - 37; x++) {
       mpcSetChar(           25, x, 9, F_STD, BLACK, WHITE, 1.0); //cima
-      mpcSetChar(APP_LINES - 7, x, 9, F_STD, BLACK, WHITE, 1.0); //baixo
-          for (int y = 26; y < APP_LINES-7; y++) {
+      mpcSetChar(pS->screenPositionY - 7, x, 9, F_STD, BLACK, WHITE, 1.0); //baixo
+          for (int y = 26; y < pS->screenPositionY-7; y++) {
              mpcSetChar(y,                x, 10, F_STD, WHITE, WHITE, 1.0); //fundo
              mpcSetChar(y,               65, 10, F_STD, BLACK, WHITE, 1.0); //esq
-             mpcSetChar(y, APP_COLUMNS - 38, 10, F_STD, BLACK, WHITE, 1.0); //dir
+             mpcSetChar(y, pS->screenPositionX - 38, 10, F_STD, BLACK, WHITE, 1.0); //dir
           }
    }
    mpcSetChar(         25,             65, 11, F_STD, BLACK, WHITE, 1.0);
-   mpcSetChar(         25, APP_COLUMNS-38, 12, F_STD, BLACK, WHITE, 1.0);
-   mpcSetChar(APP_LINES-7,             65, 13, F_STD, BLACK, WHITE, 1.0);
-   mpcSetChar(APP_LINES-7, APP_COLUMNS-38, 14, F_STD, BLACK, WHITE, 1.0);
+   mpcSetChar(         25, pS->screenPositionX-38, 12, F_STD, BLACK, WHITE, 1.0);
+   mpcSetChar(pS->screenPositionY-7,             65, 13, F_STD, BLACK, WHITE, 1.0);
+   mpcSetChar(pS->screenPositionY-7, pS->screenPositionX-38, 14, F_STD, BLACK, WHITE, 1.0);
    char texto5[] = ">        ENVIAR        <";
    for(int cont = 0; cont < (int)strlen(texto5); cont++){
         mpcSetChar(27, 66+cont, texto5[cont], F_N, BLACK, WHITE, 1 );
@@ -421,58 +393,47 @@ void textBox2(int write){
         quebra2 += 1;
     }
     //Se for pressionado Home
-    if(home == 1) {
+    if(press->home == 1) {
         mpcSetCursorPos(11, 13);
         preencheLinha(keyPRESS);
         keyPRESS = 0;
     }
-    if(home == 0){
+    if(press->home == 0){
         preencheLinha(keyPRESS);
         keyPRESS = 0;
     }
-    if(endi == 1){
+    if(press->endi == 1){
         preencheLinha(keyPRESS);
         keyPRESS = 0;
     }
-    if(left_press == 1){
+    if(press->left == 1){
         pos_coluna -= 1;
-        left_press = 0;
+        press->left = 0;
         mpcSetCursorPos(pos_linha, pos_coluna);
         preencheLinha(keyPRESS);
         keyPRESS = 0;
     }
-    if(up_press == 1){
+    if(press->up == 1){
         mpcSetCursorPos(pos_linha - 1, pos_coluna);
         pos_linha = pos_linha - 1;
         preencheLinha(keyPRESS);
         keyPRESS = 0;
-        up_press = 0;
+        press->up = 0;
     }
-    if(down_press == 1){
+    if(press->down == 1){
         mpcSetCursorPos(pos_linha + 1, pos_coluna);
         pos_linha = pos_linha + 1;
         preencheLinha(keyPRESS);
         keyPRESS = 0;
-        down_press = 0;
+        press->down = 0;
     }
-    if(right_press == 1){
+    if(press->right == 1){
         mpcSetCursorPos(pos_linha, pos_coluna + 1);
         pos_coluna = pos_coluna + 1;
         preencheLinha(keyPRESS);
         keyPRESS = 0;
-        right_press = 0;
+        press->right = 0;
     }
-    //mostra os vetores
-    /*mostraTexto(11, 13, box2a);
-    mostraTexto(12, 13, box2b);
-    mostraTexto(13, 13, box2c);
-    mostraTexto(14, 13, box2d);
-    mostraTexto(15, 13, box2e);
-    mostraTexto(16, 13, box2f);
-    mostraTexto(17, 13, box2g);
-    mostraTexto(18, 13, box2h);
-    mostraTexto(19, 13, box2i);*/
-
 }
 
 //Função que escreve na caixa de várias linhas, selecionada o vetor a ser escrito em caso de quebra de linha ou ENTER
@@ -1591,17 +1552,17 @@ void cbKeyboard(int key, int modifier, bool special, bool up) {
      }else keyPRESS = 0;
      //verifica se as teclas Home, End, Del e Backspace foram digitadas
      if((key == 106) && (special == 1) && (up == 0)){
-        home++;
+        press->home++;
         //printf("\n %d", home);
 
      }
      if((key == 107) && (special == 1)){
-        endi++;
+        press->endi++;
      }
      if(key == 127){
-        del++;
+        press->del++;
             //Se for pressionado End
-            if(endi == 1) {
+            if(press->endi == 1) {
                 mpcSetCursorPos(pos_linha, pos_coluna);
                 if((pos_linha = 11)){
                     mostraTexto(pos_linha, pos_coluna, a->box2);
@@ -1618,25 +1579,25 @@ void cbKeyboard(int key, int modifier, bool special, bool up) {
                 if((pos_linha = 15)){
                     mostraTexto(pos_linha, pos_coluna, e->box2);
                 }
-                endi = 0;
+                press->endi = 0;
             }
      }
 
      if(key == 8){
-        backspace++;
+        press->backspace++;
      }
      //verifica se as setas direcionais foram digitadas
      if((key == 100) && (special == 1)){
-        left_press++;
+        press->left++;
      }
      if((key == 101) && (special == 1)){
-        up_press++;
+        press->up++;
      }
      if((key == 102) && (special == 1)){
-        right_press++;
+        press->right++;
      }
      if((key == 103) && (special == 1)){
-        down_press++;
+        press->down++;
      }
    /*if (special) {
       if (up) {

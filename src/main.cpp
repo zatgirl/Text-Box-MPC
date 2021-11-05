@@ -19,6 +19,10 @@ int main(void)
    g = new box;
    h = new box;
    i = new box;
+   line = new mainWindow;
+   col = new mainWindow;
+   press = new keySpecial;
+
    initMpc();
 
    mpcRun(29); //frames por segundo
